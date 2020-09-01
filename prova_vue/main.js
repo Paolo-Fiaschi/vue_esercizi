@@ -1,6 +1,6 @@
 var app = Vue.component('App',{
   template: `
-    < class="container">
+    <div class="container">
       <div v-if="isAbilited" >
         <button class="btn btn-primary">Elimina file</button>        
       </div>
