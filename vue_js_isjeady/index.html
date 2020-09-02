@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>Vue js Prima Applicazione</h1>  
+        <hr>
+        <div id="app">
+            <h1>{{message}}</h1>
+            <h1>{{mioArray}}</h1>
+            <h1>{{car.colore}}</h1>
+            <div v-html="myHtml">{{myHtml}}</div>
+            <img :src="linkImg" alt="">
+            <button @click="cambioImg">Cambia</button>
+        </div>      
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="main.js"></script>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Ciao',
+            mioArray: ['Paolo', 'Luca', 'Marco'],
+            car: {
+                colore: 'red',
+                ruote: 4,
+                marca:'bmw',
+                sensori: 'si'
+            },
+            linkImg: 'https://spng.subpng.com/20180718/zqt/kisspng-vue-js-javascript-library-angularjs-react-vue-js-5b4ebe1b93c716.7614705815318871316053.jpg',
+            myHtml: '<h4>Paolo<h4>'
+        },
+        methods: {
+            cambioImg(){
+                this.linkImg = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/320px-React-icon.svg.png';
+            }
+        }
+    })
+</script>
+</html>

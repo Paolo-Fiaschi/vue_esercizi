@@ -69,15 +69,14 @@ Vue.component('products-list',{
 Vue.component('product-box', {
   template: `
     <div class="card" style="width: 240px; float: left; margin: 16px;">
-    <img class="card-img-top"
-                v-bind:src="'https://picsum.photos/240/240?image=' + item.id">
-    <div class="card-body">
-      <h4 class="card-title">{{item.nome}}</h4>
-      <p class="card-text">{{item.descrizione}}</p>
-      <p class="card-text text-right"><strong>Prezzo: ¢{{item.prezzo}}</strong></p>
-      <a href="#" class="btn btn-primary">Dettaglio</a>
-    </div>
-
+      <img class="card-img-top"
+                  v-bind:src="'https://picsum.photos/240/240?image=' + item.id">
+      <div class="card-body">
+        <h4 class="card-title">{{item.nome}}</h4>
+        <p class="card-text">{{item.descrizione}}</p>
+        <p class="card-text text-right"><strong>Prezzo: ¢{{item.prezzo}}</strong></p>
+        <a href="#" class="btn btn-primary">Dettaglio</a>
+      </div>
     </div>
   `,
   props: ['item']
