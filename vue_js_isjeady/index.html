@@ -12,16 +12,21 @@
         <hr>
         <div id="app">
             <h2>Contatore</h2>
-            <p style="font-size: 12em;">{{counter}}</p>
-            <div class="row">
-                <div class="col-6">
-                    <button @click="changeCounter('+')" style="font-size:6em">+</button>
+            <template v-if="min != max">
+                <p style="font-size: 12em;">{{counter}}</p>
+                <div class="row">
+                    <div class="col-6">
+                        <button :disabled ="maxDisabled" @click="changeCounter('+')" style="font-size:6em">+</button>
+                    </div>
+                    <!-- v-on:click o @click è la stessa cosa, come scrivere v-bind:click o :click -->
+                    <div class="col-6">
+                        <button  :disabled ="minDisabled" v-on:click="changeCounter('-')" style="font-size:6em">-</button>
+                    </div>
                 </div>
-                <!-- v-on:click o @click è la stessa cosa, come scrivere v-bind:click o :click -->
-                <div class="col-6">
-                    <button v-on:click="changeCounter('-')" style="font-size:6em">-</button>
-                </div>
-            </div>
+            </template>
+            <template v-else>
+                Errore min max uguale
+            </template>
         </div>      
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
@@ -31,14 +36,15 @@
     var app = new Vue({
         el: '#app',
         data: {
-            min: 3,
+            min: 10,
             max: 10,
-            counter: 10,
+            minDisabled: true,
+            maxDisabled: false,
+            counter: 0,
         },
         mounted: function () {
             console.log("montato correttamente");
-            this.counter = 5
-            
+            this.counter = 3
         },
         methods: {
             changeCounter(direction){
@@ -51,6 +57,17 @@
                     if (this.counter > this.min) {
                         this.counter--;                        
                     }
+                }
+                if (this.counter >= this.max) {
+                    this.minDisabled = false;
+                    this.maxDisabled = true;
+                }else if(this.counter <= this.min) {
+                    this.minDisabled = true;
+                    this.maxDisabled = false;
+                }else{
+                    this.minDisabled = false;
+                    this.maxDisabled = false;
+ 
                 }
                 
             }
