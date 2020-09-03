@@ -23,6 +23,12 @@
                         <button  :disabled ="minDisabled" v-on:click="changeCounter('-')" style="font-size:6em">-</button>
                     </div>
                 </div>
+                {{x}} - {{y}}
+                <div v-on:mousemove="updateCoordinate">
+                    <img src="https://fakeimg.pl/250x100/">
+                    <img v-on:mousemove.stop.prevent src="https://fakeimg.pl/350x200/ff0000/000">
+                </div>
+                <input v-on:keyup.space="changeText" type="text">
             </template>
             <template v-else>
                 Errore min max uguale
@@ -36,17 +42,26 @@
     var app = new Vue({
         el: '#app',
         data: {
-            min: 10,
+            min: 3,
             max: 10,
             minDisabled: true,
             maxDisabled: false,
             counter: 0,
+            x: 0,
+            y: 0
         },
         mounted: function () {
             console.log("montato correttamente");
             this.counter = 3
         },
         methods: {
+            changeText(){
+                alert("cambio");
+            },
+            updateCoordinate(event){
+                this.x = event.clientX;
+                this.y = event.clientY;
+            },
             changeCounter(direction){
                 console.log("changeCounter :" + direction);
                 if (direction == '+') {
