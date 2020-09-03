@@ -11,12 +11,17 @@
         <h1>Vue js Prima Applicazione</h1>  
         <hr>
         <div id="app">
-            <h1>{{message}}</h1>
-            <h1>{{mioArray}}</h1>
-            <h1>{{car.colore}}</h1>
-            <div v-html="myHtml">{{myHtml}}</div>
-            <img :src="linkImg" alt="">
-            <button @click="cambioImg">Cambia</button>
+            <h2>Contatore</h2>
+            <p style="font-size: 12em;">{{counter}}</p>
+            <div class="row">
+                <div class="col-6">
+                    <button @click="changeCounter('+')" style="font-size:6em">+</button>
+                </div>
+                <!-- v-on:click o @click è la stessa cosa, come scrivere v-bind:click o :click -->
+                <div class="col-6">
+                    <button v-on:click="changeCounter('-')" style="font-size:6em">-</button>
+                </div>
+            </div>
         </div>      
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
@@ -26,20 +31,28 @@
     var app = new Vue({
         el: '#app',
         data: {
-            message: 'Ciao',
-            mioArray: ['Paolo', 'Luca', 'Marco'],
-            car: {
-                colore: 'red',
-                ruote: 4,
-                marca:'bmw',
-                sensori: 'si'
-            },
-            linkImg: 'https://spng.subpng.com/20180718/zqt/kisspng-vue-js-javascript-library-angularjs-react-vue-js-5b4ebe1b93c716.7614705815318871316053.jpg',
-            myHtml: '<h4>Paolo<h4>'
+            min: 3,
+            max: 10,
+            counter: 10,
+        },
+        mounted: function () {
+            console.log("montato correttamente");
+            this.counter = 5
+            
         },
         methods: {
-            cambioImg(){
-                this.linkImg = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/320px-React-icon.svg.png';
+            changeCounter(direction){
+                console.log("changeCounter :" + direction);
+                if (direction == '+') {
+                    if (this.counter < this.max) {
+                        this.counter++;                    
+                    }
+                }else if (direction == '-'){
+                    if (this.counter > this.min) {
+                        this.counter--;                        
+                    }
+                }
+                
             }
         }
     })
