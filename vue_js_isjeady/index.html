@@ -11,18 +11,19 @@
         <h1>Vue js: V-if e Cicli For</h1>  
         <hr>
         <div id="app">
-            Var : {{show}}
-            <button @click="show = !show">Change</button>
-            <template v-if="show">
-                <div  class="one">
-                    <h1>One</h1>
-                </div>      
-            </template>
-            <template v-else>
-                <div  class="two">
-                    <h1>Two</h1>
-                </div>
-            </template>
+            <ul>
+                <li v-for="(colore, index) in colori">{{index}}: {{colore}}</li>
+            </ul>
+            <hr>
+            <h2>Articoli</h2>
+            <ul>
+                <li v-for="(articolo,index) in articoli">
+                    Articolo numero {{index}}
+                    <p v-for="(attributo, key) in articolo" :key="articolo.id">
+                        {{key}}: {{attributo}}
+                    </p>
+                </li>
+            </ul>
         </div>      
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
@@ -32,7 +33,27 @@
     var app = new Vue({
         el: '#app',
         data: {
-            show: false
+            colori: ['rosso', 'giallo', 'verde', 'bianco'],
+            articoli: [
+                {
+                    id: Math.floor(Math.random() *100),
+                    nome: 'mouse',
+                    prezzo: 25,
+                    categoria: 'informatica'
+                },
+                {
+                    id: Math.floor(Math.random() *100),
+                    nome: 'videocamera',
+                    prezzo: 250,
+                    categoria: 'video' 
+                },
+                {
+                    id: Math.floor(Math.random() *100),
+                    nome: 'tv',
+                    prezzo: 500,
+                    categoria: 'televisioni' 
+                },
+            ],
         },
         mounted: function () {
         },
