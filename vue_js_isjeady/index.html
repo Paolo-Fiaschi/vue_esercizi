@@ -12,27 +12,24 @@
         <hr>
         <div id="app">
             <h2>Contatore</h2>
-            <template v-if="min != max">
+            <template>
                 <p style="font-size: 12em;">{{counter}}</p>
                 <div class="row">
                     <div class="col-6">
-                        <button :disabled ="maxDisabled" @click="changeCounter('+')" style="font-size:6em">+</button>
+                        <button @click="changeCounter('+')" style="font-size:6em">+</button>
                     </div>
                     <!-- v-on:click o @click è la stessa cosa, come scrivere v-bind:click o :click -->
                     <div class="col-6">
-                        <button  :disabled ="minDisabled" v-on:click="changeCounter('-')" style="font-size:6em">-</button>
+                        <button  v-on:click="changeCounter('-')" style="font-size:6em">-</button>
                     </div>
                 </div>
-                {{x}} - {{y}}
-                <div v-on:mousemove="updateCoordinate">
-                    <img src="https://fakeimg.pl/250x100/">
-                    <img v-on:mousemove.stop.prevent src="https://fakeimg.pl/350x200/ff0000/000">
-                </div>
-                <input v-on:keyup.space="changeText" type="text">
             </template>
-            <template v-else>
-                Errore min max uguale
-            </template>
+            <hr>
+            <h2>{{limitF()}}</h2>
+            COMPUTED
+            <h2>{{limit}}</h2>
+            <button @click="my">my</button>
+            <span>{{textMy}}</span>
         </div>      
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
@@ -42,49 +39,42 @@
     var app = new Vue({
         el: '#app',
         data: {
-            min: 3,
-            max: 10,
-            minDisabled: true,
-            maxDisabled: false,
             counter: 0,
-            x: 0,
-            y: 0
+            textMy: 0,
         },
         mounted: function () {
-            console.log("montato correttamente");
+            // console.log("montato correttamente");
             this.counter = 3
         },
-        methods: {
-            changeText(){
-                alert("cambio");
-            },
-            updateCoordinate(event){
-                this.x = event.clientX;
-                this.y = event.clientY;
-            },
-            changeCounter(direction){
-                console.log("changeCounter :" + direction);
-                if (direction == '+') {
-                    if (this.counter < this.max) {
-                        this.counter++;                    
-                    }
-                }else if (direction == '-'){
-                    if (this.counter > this.min) {
-                        this.counter--;                        
-                    }
-                }
-                if (this.counter >= this.max) {
-                    this.minDisabled = false;
-                    this.maxDisabled = true;
-                }else if(this.counter <= this.min) {
-                    this.minDisabled = true;
-                    this.maxDisabled = false;
+        computed: {
+            limit: function () {
+                console.log("computed");
+                if (this.counter <= 0) {
+                    return "Minore";
                 }else{
-                    this.minDisabled = false;
-                    this.maxDisabled = false;
- 
+                    return "Maggiore";
                 }
-                
+            }
+        },
+        methods: {
+            changeCounter(direction){
+                // console.log("changeCounter :" + direction);
+                if (direction == '+') {
+                    this.counter++;                    
+                }else if (direction == '-'){
+                    this.counter--;                        
+                }
+            },
+            limitF(){
+                console.log("function");
+                if (this.counter <= 0) {
+                    return "Minore";
+                }else{
+                    return "Maggiore";
+                }
+            },
+            my(){
+                this.textMy = Math.random();
             }
         }
     })
