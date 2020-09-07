@@ -18,19 +18,11 @@
         <h1>Molteplici istanze</h1>  
         <hr>
         <div id="app1">
-            <div class="box">
-                <h2>{{message}}</h2>
+            <div @click="change" class="box">
+                <h2 ref="titolo">{{message}}</h2>
                 <img :src="imgLink" width="100">    
             </div>
         </div> 
-        <hr>     
-        <div id="app2">
-            <div class="box">
-                <h2>{{message}}</h2>
-                <img :src="imgLink" width="100">
-                <button @click="change">Change</button>
-            </div>
-        </div>      
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
     <script src="main.js"></script>
@@ -44,22 +36,17 @@
         },
         methods: {
             change(){
-                this.message = "Cambiato da methods";
+                // this.message = "Cambiato da methods";
+                this.$refs.titolo.innerText = "Titolo Cambiato";
+
             }
         }
     })
-    var app2 = new Vue({
-        el: '#app2',
-        data: {
-            message: "Applicazione 2",
-            imgLink: "https://assets.codepen.io/t-1003/internal/avatars/teams/default.png?format=auto&height=256&version=1513627136&width=256",
-        },
-        methods: {
-            change(){
-                // app1.message = "Cambiato";
-                app1.change();
-            }
-        }
-    })
+    // console.log(app1);
+    // console.log(app1.$refs.titolo);
+    // setTimeout(function(){
+    //     app1.$refs.titolo.innerText = "Titolo Cambiato";
+    // }, 2000);
+    
 </script>
 </html>
