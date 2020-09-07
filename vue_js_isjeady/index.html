@@ -8,34 +8,21 @@
 </head>
 <body>
     <div class="container">
-        <h1>Vue js Prima Applicazione</h1>  
+        <h1>Vue js: V-if e Cicli For</h1>  
         <hr>
         <div id="app">
-            <h2>Contatore</h2>
-            <template>
-                <p style="font-size: 12em;">{{counter}}</p>
-                <div class="row">
-                    <div class="col-6">
-                        <button @click="changeCounter('+')" style="font-size:6em">+</button>
-                    </div>
-                    <!-- v-on:click o @click è la stessa cosa, come scrivere v-bind:click o :click -->
-                    <div class="col-6">
-                        <button  v-on:click="changeCounter('-')" style="font-size:6em">-</button>
-                    </div>
+            Var : {{show}}
+            <button @click="show = !show">Change</button>
+            <template v-if="show">
+                <div  class="one">
+                    <h1>One</h1>
+                </div>      
+            </template>
+            <template v-else>
+                <div  class="two">
+                    <h1>Two</h1>
                 </div>
             </template>
-            <hr>
-            <h2>{{limitF()}}</h2>
-            COMPUTED
-            <h2>{{limit}}</h2>
-            <button @click="my">my</button>
-            <span>{{textMy}}</span>
-
-            <!-- La computed viene richiamata (quinid renderizzata) solo se viene modificata la variabile che la compone (in questo caso "counter"), mentre le function vengono scatenate in ogni caso  -->
-            <hr>
-            <br>
-            <h2>{{nome}}</h2>
-            <input v-model="nome">
         </div>      
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
@@ -45,51 +32,11 @@
     var app = new Vue({
         el: '#app',
         data: {
-            counter: 0,
-            textMy: 0,
-            nome: "",
+            show: false
         },
         mounted: function () {
-            // console.log("montato correttamente");
-            this.counter = 3
-        },
-        computed: {
-            limit: function () {
-                console.log("computed");
-                if (this.counter <= 0) {
-                    return "Minore";
-                }else{
-                    return "Maggiore";
-                }
-            }
-        },
-        watch: {
-            counter: function (value) {
-                if (value == 5) {
-                    this.textMy = "valore 3"
-                }
-            }
         },
         methods: {
-            changeCounter(direction){
-                // console.log("changeCounter :" + direction);
-                if (direction == '+') {
-                    this.counter++;                    
-                }else if (direction == '-'){
-                    this.counter--;                        
-                }
-            },
-            limitF(){
-                console.log("function");
-                if (this.counter <= 0) {
-                    return "Minore";
-                }else{
-                    return "Maggiore";
-                }
-            },
-            my(){
-                this.textMy = Math.random();
-            }
         }
     })
 </script>
