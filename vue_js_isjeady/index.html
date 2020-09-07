@@ -5,59 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        .box{
+            padding: 10px;
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Vue js: V-if e Cicli For</h1>  
+        <h1>Molteplici istanze</h1>  
         <hr>
-        <div id="app">
-            <ul>
-                <li v-for="(colore, index) in colori">{{index}}: {{colore}}</li>
-            </ul>
-            <hr>
-            <h2>Articoli</h2>
-            <ul>
-                <li v-for="(articolo,index) in articoli">
-                    Articolo numero {{index}}
-                    <p v-for="(attributo, key) in articolo" :key="articolo.id">
-                        {{key}}: {{attributo}}
-                    </p>
-                </li>
-            </ul>
+        <div id="app1">
+            <div class="box">
+                <h2>{{message}}</h2>
+                <img :src="imgLink" width="100">    
+            </div>
+        </div> 
+        <hr>     
+        <div id="app2">
+            <div class="box">
+                <h2>{{message}}</h2>
+                <img :src="imgLink" width="100">
+                <button @click="change">Change</button>
+            </div>
         </div>      
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
     <script src="main.js"></script>
 </body>
 <script>
-    var app = new Vue({
-        el: '#app',
+    var app1 = new Vue({
+        el: '#app1',
         data: {
-            colori: ['rosso', 'giallo', 'verde', 'bianco'],
-            articoli: [
-                {
-                    id: Math.floor(Math.random() *100),
-                    nome: 'mouse',
-                    prezzo: 25,
-                    categoria: 'informatica'
-                },
-                {
-                    id: Math.floor(Math.random() *100),
-                    nome: 'videocamera',
-                    prezzo: 250,
-                    categoria: 'video' 
-                },
-                {
-                    id: Math.floor(Math.random() *100),
-                    nome: 'tv',
-                    prezzo: 500,
-                    categoria: 'televisioni' 
-                },
-            ],
-        },
-        mounted: function () {
+            message: "Applicazione 1",
+            imgLink: "https://assets.codepen.io/t-1003/internal/avatars/teams/default.png?format=auto&height=256&version=1513627136&width=256",
         },
         methods: {
+            change(){
+                this.message = "Cambiato da methods";
+            }
+        }
+    })
+    var app2 = new Vue({
+        el: '#app2',
+        data: {
+            message: "Applicazione 2",
+            imgLink: "https://assets.codepen.io/t-1003/internal/avatars/teams/default.png?format=auto&height=256&version=1513627136&width=256",
+        },
+        methods: {
+            change(){
+                // app1.message = "Cambiato";
+                app1.change();
+            }
         }
     })
 </script>
