@@ -30,6 +30,12 @@
             <h2>{{limit}}</h2>
             <button @click="my">my</button>
             <span>{{textMy}}</span>
+
+            <!-- La computed viene richiamata (quinid renderizzata) solo se viene modificata la variabile che la compone (in questo caso "counter"), mentre le function vengono scatenate in ogni caso  -->
+            <hr>
+            <br>
+            <h2>{{nome}}</h2>
+            <input v-model="nome">
         </div>      
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
@@ -41,6 +47,7 @@
         data: {
             counter: 0,
             textMy: 0,
+            nome: "",
         },
         mounted: function () {
             // console.log("montato correttamente");
@@ -53,6 +60,13 @@
                     return "Minore";
                 }else{
                     return "Maggiore";
+                }
+            }
+        },
+        watch: {
+            counter: function (value) {
+                if (value == 5) {
+                    this.textMy = "valore 3"
                 }
             }
         },
