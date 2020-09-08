@@ -4,8 +4,6 @@ import router from './router'
 import store from './store'
 
 Vue.config.productionTip = false
-import MioPrimoComponente from '@/components/MioPrimoComponente.vue'
-Vue.component('MioPrimoComponente',MioPrimoComponente)
 
 new Vue({
   router,
