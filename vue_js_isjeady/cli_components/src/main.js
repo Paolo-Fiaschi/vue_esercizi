@@ -4,7 +4,13 @@ import router from './router'
 import store from './store'
 
 Vue.config.productionTip = false
-
+export const eventBus = new Vue({
+  methods: {
+    cambioColore(colore){
+      this.$emit('cambioColore', colore);
+    }
+  }
+});
 new Vue({
   router,
   store,

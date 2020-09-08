@@ -9,7 +9,10 @@
     <hr>
     <div class="row">
       <div class="col-md-6">
-        <ComponenteA :colore="coloreInApp"></ComponenteA>
+        <ComponenteA 
+        :colore="coloreInApp"
+        @eventoReset="coloreInApp = $event"
+        ></ComponenteA>
       </div>
       <div class="col-md-6">
         <ComponenteB></ComponenteB>
