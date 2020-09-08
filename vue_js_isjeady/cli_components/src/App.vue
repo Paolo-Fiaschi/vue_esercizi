@@ -4,36 +4,17 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <h2>App colore verso A: <u>{{coloreInApp}}</u></h2>
-    <button @click="coloreInApp='Arancione'">Cambia Colore</button>
-    <hr>
-    <div class="row">
-      <div class="col-md-6">
-        <ComponenteA 
-        :colore="coloreInApp"
-        @eventoReset="coloreInApp = $event"
-        ></ComponenteA>
-      </div>
-      <div class="col-md-6">
-        <ComponenteB></ComponenteB>
-      </div>
-    </div>
-    <!-- <router-view/> -->
+    <router-view/>
   </div>
 </template>
 <script>
-import ComponenteA from '@/components/ComponenteA.vue'
-import ComponenteB from '@/components/ComponenteB.vue'
 
 export default {
   name: 'app',
   components: {
-    ComponenteA,
-    ComponenteB
   },
   data(){
     return{
-      coloreInApp: 'Verde'
     }
   }
 }
