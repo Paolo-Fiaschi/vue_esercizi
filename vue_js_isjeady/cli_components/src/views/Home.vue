@@ -15,7 +15,6 @@
                 <div class="form-group">
                   <label for="exampleInputEmail1">Preferiti</label>
                   <Star v-model="user.pref"></Star>
-                  <input v-model="user.email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>
@@ -53,7 +52,7 @@
                     <option v-for="col in selectedValues" :value="col.value" :key="col">{{col.text}}</option>
                   </select>
                 </div><br>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button @click.prevent="submitF()" type="submit" class="btn btn-primary">Submit</button>
               </form> 
            </div>
           </div>
@@ -102,6 +101,13 @@ export default {
         'genere': 'Maschio',
         'colori':'black',
         'pref': false,
+      },
+      methods: {
+        submitF(){
+          console.log('submittes');
+          // console.log(this.user);
+          
+        }
       },
       selectedValues:[
         {value: 'yellow', text: 'Giallo'},
