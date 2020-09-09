@@ -41,6 +41,12 @@
                 <label class="form-check-label" for="inlineRadio1">Maschio</label>
                 <input v-model="user.genere" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Femmina">
                 <label class="form-check-label" for="inlineRadio1">Femmina</label>
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="inputState">Colori</label>
+                  <select v-model="user.colori" id="inputState" class="form-control">
+                    <option v-for="col in selectedValues" :value="col.value" :key="col">{{col.text}}</option>
+                  </select>
                 </div><br>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form> 
@@ -56,6 +62,7 @@
               <p>Number: {{user.numb}}</p>
               <p style="white-space: pre">Msg: {{user.msg}}</p>
               <p>Genere: {{user.genere}}</p>
+              <p>Colori: {{user.colori}}</p>
               <p>Sondaggio:</p>
               <ul>
                 <li v-for="s of user.sondaggio" v-bind:key="s">
@@ -85,8 +92,14 @@ export default {
         'number': '',
         'msg': '',
         'sondaggio': [],
-        'genere': 'Maschio'
-      }
+        'genere': 'Maschio',
+        'colori':'black'
+      },
+      selectedValues:[
+        {value: 'yellow', text: 'Giallo'},
+        {value: 'red', text: 'Rosso'},
+        {value: 'black', text: 'Nero'}
+        ]
     }
   }
 }
