@@ -13,6 +13,11 @@
                   <input v-model="user.email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                 </div>
                 <div class="form-group">
+                  <label for="exampleInputEmail1">Preferiti</label>
+                  <Star v-model="user.pref"></Star>
+                  <input v-model="user.email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+                <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>
                   <input v-model.lazy="user.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                 </div>
@@ -58,6 +63,7 @@
             <div class="card-body">
               <h5 class="card-title">Form Data</h5>
               <p>Email: {{user.email}}</p>
+              <p>Preferito: {{user.pref}}</p>
               <p>Password: {{user.password}}</p>
               <p>Number: {{user.numb}}</p>
               <p style="white-space: pre">Msg: {{user.msg}}</p>
@@ -81,6 +87,7 @@
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
 // import CardComponent from '@/components/CardComponent.vue'
+import Star from '@/components/Star.vue'
 
 export default {
   name: 'Home',
@@ -93,7 +100,8 @@ export default {
         'msg': '',
         'sondaggio': [],
         'genere': 'Maschio',
-        'colori':'black'
+        'colori':'black',
+        'pref': false,
       },
       selectedValues:[
         {value: 'yellow', text: 'Giallo'},
@@ -101,6 +109,9 @@ export default {
         {value: 'black', text: 'Nero'}
         ]
     }
+  },
+  components: {
+    Star
   }
 }
 </script>
