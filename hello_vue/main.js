@@ -15,7 +15,7 @@ Vue.component("task-list", {
   },
   methods: {
     submitTask(){
-      if (this.new_task) {
+      if (this.new_task && !(/^\s*$/.test(this.new_task))) {
         this.$emit('submit-task', this.new_task)
         this.new_task = null;
         this.error = null;
