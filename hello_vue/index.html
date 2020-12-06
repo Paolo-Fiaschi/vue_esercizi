@@ -9,11 +9,10 @@
 </head>
 <body>
     <div id="app">
-        <comment
-            v-for="(comment, index) in comments"
-            :comment="comment"
-            :key="index"
-        ></comment>
+        <comment-list
+            :comments="comments"
+            @submit-comment="addNewComment"
+        ></comment-list>
         <!-- <p v-if="errors">{{errors}}</p>
         <div class="row justify-content-center mt-3">
             <form @submit.prevent="onSubmit">
