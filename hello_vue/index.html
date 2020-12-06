@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <p v-if="errors">{{errors}}</p>
+        <div class="row justify-content-center mt-3">
+            <form @submit.prevent="onSubmit">
+                <div class="form-group">
+                    <textarea
+                        class="form-control"
+                        id="commentText"
+                        row="8"
+                        cols="80"
+                        v-model="comment"
+                    >
+                    </textarea>
+                </div>
+                <button 
+                    type="submit" 
+                    class="btn btn-sm btn-primary"
+                    >Pubblica Commento</button>
+            </form>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center mt-3">
+                <div class="col-10">
+                    <div class="card" v-for="comment in comments">
+                        <div class="card-body">
+                            <p>{{comment}}</p>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="main.js"></script>
+</body>
+</html>
+<style>
+    .circle{width:250px;height: 250px;border-radius:50%;}
+    /* .square{width:250px;height: 250px;} */
+</style>
