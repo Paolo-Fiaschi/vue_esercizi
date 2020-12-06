@@ -1,108 +1,98 @@
 Vue.config.devtools = true;
-// comment list coimponent
-Vue.component("comment-list", {
+// task list component
+Vue.component("task-list", {
   props: {
-    comments: {
+    tasks:{
       type: Array,
       required: true
     }
   },
   data: function(){
-    return {
-      new_comment: null,
-      comment_author: null,
-      error: null
+    return{
+      new_task: null,
+      error: null,
     }
   },
   methods: {
-    submitComment(){
-      if (this.new_comment && this.comment_author) {
-        this.$emit('submit-comment',{username:this.comment_author, content: this.new_comment})
-        this.new_comment = null;
-        this.comment_author = null;
-        if (this.error) {
-          this.error = null;
-        }
+    submitTask(){
+      if (this.new_task) {
+        this.$emit('submit-task', this.new_task)
+        this.new_task = null;
+        this.error = null;
       }else{
-        this.error = "Assicurati di compilare tutti i campi!"
+        this.error = "Inserisci un task!"
       }
     }
   },
-  template: `
-    <div class="mt-2">
+  template:`
+    <div class="mt-3">
       <div class="container">
-        <single-comment
-          v-for="(comment, index) in comments"
-          :comment="comment"
-          :key="index"
-        ></single-comment>
-        <hr>
+        <span class="">Task rimanenti: {{tasks.length}}</span>
+        <form 
+        class="form-group"
+        @submit.prevent="submitTask"
+        >
+          <input type="text"
+            placeholder="Aggiungi un nuovo task"
+            class="form-control"
+            v-model="new_task"
+          >
+        </form>
         <h3>{{error}}</h3>
-        <form @submit.prevent="submitComment">
-          <div class="form-group">
-            <label for="commentAuthor">Il tuo username</label>
-            <input 
-              type="text"
-              class="form-control"
-              id="commentAuthor"
-              v-model="comment_author"
-              >
-          </div>
-          <div class="form-group">
-            <label for="commentText">Aggiungi commento</label>
-            <textarea 
-              class="form-control"
-              id="commentText"
-              rows="3"
-              cols="40"
-              v-model="new_comment"
-              >
-            </textarea>
-          </div>
-          <button type="submit" class="btn btn-sm btn-primary">Aggiungi commento</button>
-        </form>   
-        <br>     
+        <task
+          v-for="(task, index) in tasks"
+          :task = "task"
+          :key="index"
+          @delete-task="tasks.splice(index,1)"
+        >
+        </task>
       </div>
     </div>
   `
 })
-// single comment component
-Vue.component("single-comment", {
+// task component
+Vue.component("task", {
   props: {
-    comment: {
-      type: Object,
-      required: true,
+    task:{
+      type: String,
+      required: true
+    },
+    index:{
+      type: Number
     }
   },
-  template: `
-    <div class="comment mb-2">
-      <div class="card">
-        <div class="card-header">
-          <p>Pubblicato da: {{comment.username}}</p>
-          </div>
-          <div class="card-body">
-            <p>{{comment.content}}</p>
-          </div>
+  methods: {
+    deleteTask(){
+      this.$emit('delete-task')
+    }
+  },
+  template:`
+    <div class="alert alert-success">
+      <div> {{task}}
+        <button 
+          type="button" 
+          class="close" 
+          aria-label="Close"
+          @click="deleteTask"
+          >
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    </div>
+    </div>      
   `
 })
 var app = new Vue({
   el: "#app",
   data:{
-    comments: [
-      {username: 'batman', content: 'primo commento'},
-      {username: 'superman', content: 'secondo commento'},
-      {username: 'robin', content: 'terzo commento'},
-      {username: 'catwoman', content: 'quarto commento'},
-    ],
+    tasks:[] 
   },
   methods:{
-    addNewComment(new_comment) {
-      this.comments.push(new_comment);
+    addNewTask(new_task){
+      this.tasks.push(new_task);
     }
   },
   computed:{
+
   }
 })
 

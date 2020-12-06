@@ -9,46 +9,17 @@
 </head>
 <body>
     <div id="app">
-        <comment-list
-            :comments="comments"
-            @submit-comment="addNewComment"
-        ></comment-list>
-        <!-- <p v-if="errors">{{errors}}</p>
-        <div class="row justify-content-center mt-3">
-            <form @submit.prevent="onSubmit">
-                <div class="form-group">
-                    <textarea
-                        class="form-control"
-                        id="commentText"
-                        row="8"
-                        cols="80"
-                        v-model="comment"
-                    >
-                    </textarea>
-                </div>
-                <button 
-                    type="submit" 
-                    class="btn btn-sm btn-primary"
-                    >Pubblica Commento</button>
-            </form>
-        </div>
-        <div class="container">
-            <div class="row justify-content-center mt-3">
-                <div class="col-10">
-                    <div class="card" v-for="comment in comments">
-                        <div class="card-body">
-                            <p>{{comment}}</p>
-                        </div>
-                    </div>                    
-                </div>
-            </div>
-        </div> -->
+        <task-list
+            @submit-task="addNewTask"
+            :tasks="tasks"
+            
+        ></task-list>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
     <script src="main.js"></script>
 </body>
 </html>
 <style>
-    .circle{width:250px;height: 250px;border-radius:50%;}
+    /* .circle{width:250px;height: 250px;border-radius:50%;} */
     /* .square{width:250px;height: 250px;} */
 </style>
