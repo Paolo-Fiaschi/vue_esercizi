@@ -9,7 +9,12 @@
 </head>
 <body>
     <div id="app">
-        <p v-if="errors">{{errors}}</p>
+        <comment
+            v-for="(comment, index) in comments"
+            :comment="comment"
+            :key="index"
+        ></comment>
+        <!-- <p v-if="errors">{{errors}}</p>
         <div class="row justify-content-center mt-3">
             <form @submit.prevent="onSubmit">
                 <div class="form-group">
@@ -38,7 +43,7 @@
                     </div>                    
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
     <script src="main.js"></script>
